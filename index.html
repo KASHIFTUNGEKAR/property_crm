@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+        }
+        .calculator {
+            background: rgb(100, 46, 46);
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 320px;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            font-size: 24px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: right;
+            box-sizing: border-box;
+        }
+        button {
+            width: 75px;
+            padding: 15px;
+            margin: 5px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #667eea;
+            color: white;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #764ba2;
+        }
+        button.operator {
+            background: #ff6b6b;
+        }
+        button.operator:hover {
+            background: #ee5a52;
+        }
+        button.equals {
+            background: #51cf66;
+            width: 160px;
+        }
+        button.equals:hover {
+            background: #40c057;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <div>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="deleteLastChar()">Del</button>
+            <button class="operator" onclick="appendOperator('/')">÷</button>
+            <button class="operator" onclick="appendOperator('*')">×</button>
+        </div>
+        <div>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button class="operator" onclick="appendOperator('-')">-</button>
+        </div>
+        <div>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button class="operator" onclick="appendOperator('+')">+</button>
+        </div>
+        <div>
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button class="operator" onclick="appendOperator('.')">,</button>
+        </div>
+        <div>
+            <button onclick="appendNumber('0')" style="width: 160px;">0</button>
+            <button class="equals" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        function appendNumber(num) {
+            document.getElementById('display').value += num;
+        }
+        function appendOperator(op) {
+            document.getElementById('display').value += op;
+        }
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+        function deleteLastChar() {
+            const display = document.getElementById('display');
+            display.value = display.value.slice(0, -1);
+        }
+        function calculate() {
+            const display = document.getElementById('display');
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
